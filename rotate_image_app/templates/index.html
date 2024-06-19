@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Rotator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Upload and Rotate Image</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input id="file-input" type="file" name="file" accept="image/*">
+        <button type="submit">Subir</button>
+    </form>
+
+    {% if original_image %}
+    <h2>Original Image</h2>
+    <img src="{{ url_for('send_uploaded_file', filename=original_image) }}" alt="Original Image">
+    
+    <h2>Predicción de Platos Peruanos ☺</h2>
+    <form action="/predict/{{original_image}}" method="post">
+        <button type="submit">Predicción</button>
+    </form>
+
+    {% if predict_image %}
+    <h2>Predicción</h2>
+    <img src="{{ url_for('send_rotated_file', filename=predict_image) }}" alt="Rotated Image">
+    {% endif %}
+    {% endif %}
+</body>
+</html>
