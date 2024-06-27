@@ -1,30 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Image Rotator</title>
+    <title>Semáforo Nutricional</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Upload and Rotate Image</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input id="file-input" type="file" name="file" accept="image/*">
-        <button type="submit">Subir</button>
-    </form>
+    <div class="container">
+        <header>
+            <h1>Semáforo Nutricional</h1>
+        </header>
+        <main>
+            <section class="upload-section">
+                <h2>Subir Imagen del Plato</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input id="file-input" type="file" name="file" accept="image/*">
+                    <button type="submit">Subir</button>
+                </form>
+            </section>
 
-    {% if original_image %}
-    <h2>Original Image</h2>
-    <img src="{{ url_for('send_uploaded_file', filename=original_image) }}" alt="Original Image">
-    
-    <h2>Predicción de Platos Peruanos ☺</h2>
-    <form action="/predict/{{original_image}}" method="post">
-        <button type="submit">Predicción</button>
-    </form>
-
-    {% if predict_image %}
-    <h2>Predicción</h2>
-    <img src="{{ url_for('send_rotated_file', filename=predict_image) }}" alt="Rotated Image">
-    {% endif %}
-    {% endif %}
+            {% if original_image %}
+            <section class="evaluation-section">
+                <h2>Plato a Evaluar</h2>
+                <div class="images-container">
+                    <div class="image-wrapper">
+                        <img src="{{ url_for('send_uploaded_file', filename=original_image) }}" alt="Imagen Original">
+                    </div>
+                    <h2> </h2>
+                    {% if not predict_image %}
+                    <form action="/predict/{{original_image}}" method="post">
+                        <button type="submit">Predicción</button>
+                    </form>
+                    {% endif %}
+                    {% if predict_image %}
+                    <h2>Imagen predecida</h2>
+                    <div class="image-wrapper">
+                        <img src="{{ url_for('send_rotated_file', filename=predict_image) }}" alt="Imagen Predicha">
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+            {% endif %}
+        </main>
+    </div>
 </body>
 </html>

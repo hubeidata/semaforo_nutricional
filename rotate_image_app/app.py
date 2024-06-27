@@ -97,14 +97,14 @@ def send_uploaded_file(filename):
 # Vista para manejar la carga de archivos y la predicción
 @app.route('/predict/<filename>', methods=['POST'])
 def predict_image(filename):
-    angle = int(request.form.get('angle', 120))
+    plato = "chicharrón"
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     image = Image.open(file_path)
     predict_image = prediccion(file_path)
     predict_image_PIL = Image.fromarray(predict_image.astype('uint8'), 'RGB')
     rotated_path = os.path.join(app.config['ROTATED_FOLDER'], filename)
     predict_image_PIL.save(rotated_path)
-    return render_template('index.html', original_image=filename, predict_image=filename)
+    return render_template('index.html', original_image=filename, predict_image=filename, plato=plato)
 
 # Vista para mostrar el formulario de carga de archivos
 @app.route('/', methods=['GET'])
