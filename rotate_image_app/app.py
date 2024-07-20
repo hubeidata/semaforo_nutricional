@@ -9,8 +9,8 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import matplotlib.pyplot as plt
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'C:/Users/admin\Documents/semaforo/web/rotate_image_app/static/uploads/'
-ROTATED_FOLDER = 'C:/Users/admin\Documents/semaforo/web/rotate_image_app/static/rotated/'
+UPLOAD_FOLDER = 'static/uploads/'
+ROTATED_FOLDER = 'static/rotated/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ROTATED_FOLDER'] = ROTATED_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'jfif', 'webp'}
@@ -30,7 +30,7 @@ def preprocess_image(image_path):
 # Realizar la predicción
 def prediccion(image_path):
     # Ruta al modelo entrenado y a la carpeta de predicciones
-    model_path = 'C:/Users/admin/Documents/semaforo/web/rotate_image_app/moodel/food20_classification_experimento_model.h5'    
+    model_path = 'static/model/food20_classification_experimento_model.h5'    
 
     # Cargar el modelo entrenado
     model = load_model(model_path)
@@ -112,4 +112,4 @@ def show_form():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

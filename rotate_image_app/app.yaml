@@ -1,0 +1,21 @@
+runtime: python39  # Especifica la versión de Python
+
+entrypoint: gunicorn -b :$PORT app:app  # Comando para iniciar tu aplicación
+
+handlers:
+  - url: /static
+    static_dir: static  # Define la carpeta estática
+
+  - url: /.*
+    script: auto  # Define que el resto de las rutas serán manejadas por tu aplicación
+
+# Opcional: Si tienes dependencias adicionales, puedes especificarlas aquí
+env_variables:
+  # Aquí puedes añadir variables de entorno si es necesario
+  # Por ejemplo:
+  # MY_VARIABLE: 'valor'
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 2

@@ -1,0 +1,9 @@
+Flask
+numpy
+opencv-python-headless
+Pillow
+tensorflow
+google-cloud-storage
+gunicorn
+protobuf
+matplotlib
