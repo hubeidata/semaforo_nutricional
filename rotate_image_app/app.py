@@ -61,7 +61,9 @@ def prediccion(image_path):
         font_scale, 
         font_color, 
         line_type)
-    return img
+    
+    img = cv2.resize(img(200, 200))
+    return img  
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
