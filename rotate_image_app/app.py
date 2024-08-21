@@ -30,7 +30,7 @@ def preprocess_image(image_path):
 # Realizar la predicción
 def prediccion(image_path):
     # Ruta al modelo entrenado y a la carpeta de predicciones
-    model_path = 'rotate_image_app/static/model_2/food20_classification_experimento_model.h5'
+    model_path = 'static/model/food_classification_model_1.h5'
 
     # Cargar el modelo entrenado
     model = load_model(model_path)

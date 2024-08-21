@@ -1,3 +1,4 @@
-rotate_image_app/static/model/food20_classification_experimento_model.h5
 rotate_image_app/static/uploads/
 rotate_image_app/static/rotated/
+rotate_image_app/static/model/food_classification_model_1.h5
+rotate_image_app/static/model/food_classification_model.h5
