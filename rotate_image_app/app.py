@@ -30,7 +30,7 @@ def preprocess_image(image_path):
 # Realizar la predicción
 def prediccion(image_path):
     # Ruta al modelo entrenado y a la carpeta de predicciones
-    model_path = 'static/model/food20_classification_experimento_model.h5'
+    model_path = 'rotate_image_app/static/model_2/food20_classification_experimento_model.h5'
 
     # Cargar el modelo entrenado
     model = load_model(model_path)
@@ -62,7 +62,6 @@ def prediccion(image_path):
         font_color, 
         line_type)
     
-    img = cv2.resize(img(200, 200))
     return img  
 
 @app.route('/uploads/<filename>')
@@ -85,7 +84,29 @@ def upload_file():
     if file:
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
-        return render_template('index.html', original_image=file.filename)
+        print(f"Nombre de la imagen cargada *: {file.filename}")  # Imprime el valor de original_image
+        print(f"Ruta de la imagen: {file_path}")
+        
+        # Abre la imagen con Pillow
+        with Image.open(file_path) as img:
+            
+            # Calcula la nueva altura y ancho manteniendo la proporción
+            base_height = 200
+            height_percent = (base_height / float(img.size[1]))
+            new_width = int((float(img.size[0]) * float(height_percent)))
+            new_size = (new_width, base_height)
+            
+            # Redimensiona la imagen
+            resized_image = img.resize((new_width, base_height))
+            resized_filename = f'resized_{file.filename}'
+            print(f"Nombre de la imagen cargada *: {resized_filename}")
+            resized_path = os.path.join(app.config['UPLOAD_FOLDER'], resized_filename)
+            print(f"Ruta de la imagen: {resized_path}")
+            
+            # Guarda la imagen redimensionada
+            resized_image.save(resized_path)
+        
+        return render_template('index.html', original_image=resized_filename)
     return redirect(request.url)
 
 @app.route('/rotated/<filename>')
