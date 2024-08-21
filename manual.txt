@@ -1,0 +1,6 @@
+sudo apt update
+sudo apt install git
+git clone https://github.com/usuario/repositorio.git
+cd ruta/del/repositorio
+git pull origin nombre-de-la-rama
+♫
