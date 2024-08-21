@@ -16,8 +16,14 @@
         <main>
             <section class="upload-section">
                 <h2>Subir Imagen del Plato</h2>
+                <!-- Mostrar mensaje de error si existe -->
+                {% if error_message %}
+                    <div style="color: red;">
+                        <p>{{ error_message }}</p>
+                    </div>
+                {% endif %}
                 <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input id="file-input" type="file" name="file" accept="image/*">
+                    <input id="file-input" type="file" name="file" accept=".jpg,.jpeg,.gif,.bmp,.tiff,.tif,.webp,.ppm,.pgm,.ico,.eps">
                     <button type="submit">Subir</button>
                 </form>
             </section>
@@ -36,10 +42,21 @@
                     </form>
                     {% endif %}
                     {% if predict_image %}
-                    <h2>Plato evaluado</h2>
+                    <h2>Plato Evaluado</h2>
                     <div class="image-wrapper">
                         <img src="{{ url_for('send_rotated_file', filename=predict_image) }}" alt="Imagen Predicha">
                     </div>
+                    <h2 class="nutrition-heading">Información Nutricional</h2>
+                    <p>Plato: {{ plato }}</p>
+                    <ul class="nutrition-info">
+                        {% if valor_nutricional %}
+                            {% for key, value in valor_nutricional.items() %}
+                                <li>{{ key.capitalize() }}: {{ value }} g</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Información nutricional no disponible para este plato.</li>
+                        {% endif %}
+                    </ul>
                     {% endif %}
                 </div>
             </section>

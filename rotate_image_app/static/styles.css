@@ -96,3 +96,27 @@ img:hover {
     transform: scale(1.05);
     box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.4);
 }
+
+/* Nuevas reglas para la visualización de la información nutricional */
+ul.nutrition-info {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    text-align: left;
+    display: inline-block;
+}
+
+ul.nutrition-info li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul.nutrition-info li:last-child {
+    border-bottom: none;
+}
+
+.nutrition-heading {
+    font-weight: bold;
+    color: #00796b;
+    margin: 10px 0;
+}
